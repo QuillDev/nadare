@@ -26,7 +26,6 @@
 
     <modules>
         <module>everwinter</module>
-        <module>test</module>
         <module>entries</module>
         <module>holograms</module>
         <module>bukkit-common</module>
