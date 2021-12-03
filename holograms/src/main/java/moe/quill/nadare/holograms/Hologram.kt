@@ -1,5 +1,6 @@
 package moe.quill.nadare.holograms
 
+import moe.quill.nadare.entries.DynamicEntry
 import moe.quill.nadare.entries.Entry
 import org.bukkit.*
 import org.bukkit.entity.AreaEffectCloud
@@ -44,7 +45,12 @@ interface Hologram {
         }
 
         for (idx in 0 until entries.size) {
-            entities[idx].customName(entries[idx].value)
+            val entry = entries[entries.size - 1 - idx]
+            when (entry) {
+                is DynamicEntry -> entry.update()
+            }
+
+            entities[idx].customName(entry.value)
         }
     }
 
@@ -56,6 +62,7 @@ interface Hologram {
         ) {
             val line = it as AreaEffectCloud
             line.setParticle(Particle.BLOCK_CRACK, Bukkit.createBlockData(Material.AIR))
+            line.isCustomNameVisible = true
             line.ticksLived = Int.MAX_VALUE
             line.radius = 0f
         } as AreaEffectCloud
