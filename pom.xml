@@ -28,6 +28,7 @@
         <module>everwinter</module>
         <module>entries</module>
         <module>holograms</module>
+        <module>cooking</module>
         <module>bukkit-common</module>
     </modules>
 
@@ -36,6 +37,7 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
