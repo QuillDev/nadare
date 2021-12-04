@@ -22,6 +22,7 @@
         <!--Minecraft Stuff-->
         <paper.version>1.18-R0.1-SNAPSHOT</paper.version>
         <adventure.version>4.9.3</adventure.version>
+        <protocollib.version>4.8.0-SNAPSHOT</protocollib.version>
     </properties>
 
     <modules>

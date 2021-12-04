@@ -12,5 +12,6 @@ class AddCold : BukkitRunnable() {
 //        val ep: EntityPlayer = (player as CraftPlayer).getHandle()
 //        ep.setTicksFrozen(ep.getTicksRequiredToFreeze())
 //        ep.b.sendPacket(PacketPlayOutEntityMetadata(ep.getId(), ep.getDataWatcher(), true))
+
     }
 }
