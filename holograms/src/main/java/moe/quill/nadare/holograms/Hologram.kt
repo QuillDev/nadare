@@ -50,7 +50,6 @@ interface Hologram {
             when (entry) {
                 is DynamicEntry -> entry.update()
             }
-
             entities[idx].customName(entry.value)
         }
     }
