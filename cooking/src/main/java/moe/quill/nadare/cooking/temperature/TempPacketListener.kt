@@ -20,8 +20,7 @@ class TempPacketListener(plugin: Plugin, private val tempHandler: TempHandler) :
 
         val oldBits = WrappedDataWatcher.getEntityWatcher(entity)
 
-        val ticks = tempHandler.freezeStates.getOrPut(entity.uniqueId) { 0L }
-        oldBits.setObject(7, ticks)
+        oldBits.setObject(7, tempHandler.getTicks(entity.uniqueId))
         event.packet.watchableCollectionModifier.write(0, oldBits.watchableObjects)
     }
 }

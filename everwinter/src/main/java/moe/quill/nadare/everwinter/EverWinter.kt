@@ -9,7 +9,7 @@ class EverWinter : JavaPlugin(), ModuleBase {
 
     override fun onEnable() {
         // Plugin startup logic
-
+        registerCommand(TestCommand())
     }
 
     override fun onDisable() {
