@@ -1,6 +1,8 @@
 package moe.quill.nadare.cooking.core
 
 import com.destroystokyo.paper.profile.ProfileProperty
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.*
 import org.bukkit.block.data.type.Campfire
 import org.bukkit.entity.ArmorStand
@@ -19,6 +21,7 @@ class EWCampfire (
 
     var pot: ArmorStand? = null
     val SIZE: Int = 3
+    var servings = 3
     var ingredients: MutableList<Material?> = ArrayList()
 
     val listener: CampfireListener = CampfireListener(this)
@@ -34,7 +37,7 @@ class EWCampfire (
 
         val world = location.world
 
-        val litSound = Sound.BLOCK_FIRE_AMBIENT
+        val litSound = Sound.BLOCK_HONEY_BLOCK_PLACE
         val unlitSound = Sound.BLOCK_HONEY_BLOCK_BREAK
         world.playSound(location, (if((location.block.blockData as Campfire).isLit) litSound else unlitSound), 1f, 1f)
 
@@ -89,10 +92,38 @@ class EWCampfire (
     }
 
     fun destroy(){
+        removePot()
+        location.block.breakNaturally()
+    }
+
+    fun removePot(){
         pot?.isInvulnerable = false
         pot?.remove()
-        if(hasPot) location.world.dropItemNaturally(location, ItemStack(Material.CAULDRON))
-        location.block.breakNaturally()
+        if(!hasPot) return
+        val item = location.world.dropItemNaturally(location, ItemStack(Material.CAULDRON))
+        item.isInvulnerable = true
+        hasPot = false
+    }
+
+    fun grabServing(player: Player){
+        if(ingredients.size == 0 || servings == 0) {
+            player.sendActionBar(Component.text("That's just an empty pot!").color(NamedTextColor.GREEN))
+            return
+        }
+        if(!(location.block.blockData as Campfire).isLit) {
+            player.sendActionBar(Component.text("This food seems a little cold...").color(NamedTextColor.GREEN))
+            return
+        }
+
+        servings -= 1
+
+        var slot = player.inventory.heldItemSlot
+        player.inventory.addItem(ItemStack(if(ingredients.contains(Material.POTION)) Material.SUSPICIOUS_STEW else Material.RABBIT_STEW))
+
+        location.world.playSound(location, Sound.BLOCK_HONEY_BLOCK_BREAK, 1f, 1f)
+        if(servings != 0) return
+        ingredients = ArrayList()
+        servings = 3
     }
 
 }
