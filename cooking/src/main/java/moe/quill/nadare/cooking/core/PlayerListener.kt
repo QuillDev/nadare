@@ -5,8 +5,10 @@ import org.bukkit.block.data.type.Campfire
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
+import org.bukkit.plugin.java.JavaPlugin
 
-class PlayerListener(private val campfireManager: CampfireManager) : Listener {
+class PlayerListener(private val plugin: JavaPlugin, private val campfireManager: CampfireManager) : Listener {
+
     @EventHandler
     private fun onPlayerPlaceCampfire(event: BlockPlaceEvent){
         val block = event.block
@@ -14,6 +16,6 @@ class PlayerListener(private val campfireManager: CampfireManager) : Listener {
         val blockData = block.blockData as Campfire
         val location = block.location
 
-        campfireManager.registerCampfire(EWCampfire(location, blockData, false).create())
+        campfireManager.registerCampfire(EWCampfire(plugin, location, blockData, false).create())
     }
 }

@@ -8,7 +8,6 @@ class CampfireManager(private val plugin: JavaPlugin) {
 
      fun registerCampfire(campfire: EWCampfire){
           campfires.add(campfire)
-          Bukkit.getServer().pluginManager.registerEvents(campfire.listener, plugin)
      }
 
 
