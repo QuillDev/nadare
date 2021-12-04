@@ -22,12 +22,14 @@
         <!--Minecraft Stuff-->
         <paper.version>1.18-R0.1-SNAPSHOT</paper.version>
         <adventure.version>4.9.3</adventure.version>
+        <protocollib.version>4.8.0-SNAPSHOT</protocollib.version>
     </properties>
 
     <modules>
         <module>everwinter</module>
         <module>entries</module>
         <module>holograms</module>
+        <module>cooking</module>
         <module>bukkit-common</module>
     </modules>
 
@@ -36,6 +38,7 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
