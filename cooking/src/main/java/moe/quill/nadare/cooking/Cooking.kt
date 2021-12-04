@@ -27,9 +27,9 @@ class Cooking : JavaPlugin() {
 
         BukkitLambda{
             Bukkit.getOnlinePlayers().forEach{
-                tempHandler.modifyFreezeTicks(it.uniqueId, 5)
+                tempHandler.modifyFreezeTicks(it.uniqueId, 1)
             }
-        }.runTaskTimer(this, 0, 5)
+        }.runTaskTimer(this, 0, 10)
     }
 
     override fun onDisable() {

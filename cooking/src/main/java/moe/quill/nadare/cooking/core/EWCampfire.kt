@@ -1,6 +1,7 @@
 package moe.quill.nadare.cooking.core
 
 import com.destroystokyo.paper.profile.ProfileProperty
+import moe.quill.nadare.holograms.DynamicHologram
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.*
