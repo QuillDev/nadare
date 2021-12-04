@@ -1,15 +1,20 @@
 package moe.quill.nadare.cooking.temperature
 
-import com.comphenix.protocol.PacketType
-import com.comphenix.protocol.events.ListenerPriority
-import com.comphenix.protocol.events.PacketAdapter
-import com.comphenix.protocol.events.PacketEvent
-import com.comphenix.protocol.wrappers.WrappedDataWatcher
-import org.bukkit.entity.Player
-import org.bukkit.plugin.Plugin
 import java.util.*
 
 class TempHandler {
-    val freezeStates = mutableMapOf<UUID, Long>()
+    private val freezeStates = mutableMapOf<UUID, Long>()
+    private val maxTicks = 140L
 
+    fun setTicks(uuid: UUID, amount: Long) {
+        freezeStates.getOrPut(uuid) { amount.coerceAtMost(maxTicks).coerceAtLeast(0) }
+    }
+
+    fun modifyTicks(uuid: UUID, amount: Long) {
+        setTicks(uuid, getTicks(uuid) + amount)
+    }
+
+    fun getTicks(uuid: UUID): Long {
+        return freezeStates.getOrDefault(uuid, 0)
+    }
 }
