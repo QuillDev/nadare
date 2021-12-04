@@ -2,23 +2,28 @@ package moe.quill.nadare.cooking
 
 import com.comphenix.protocol.ProtocolLibrary
 import moe.quill.nadare.bukkitcommon.BukkitLambda
+import moe.quill.nadare.bukkitcommon.ModuleBase
 import moe.quill.nadare.cooking.core.CampfireManager
 import moe.quill.nadare.cooking.core.PlayerListener
 import moe.quill.nadare.cooking.events.CustomEventListener
 import moe.quill.nadare.cooking.temperature.TempHandler
 import moe.quill.nadare.cooking.temperature.TempPacketListener
 import org.bukkit.Bukkit
+import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
-class Cooking : JavaPlugin() {
+class Cooking : JavaPlugin(), ModuleBase {
+    override val plugin = this
 
     override fun onEnable() {
         // Plugin startup logic
         val campfireManager = CampfireManager(this)
 
-        server.pluginManager.registerEvents(CustomEventListener(), this)
-        server.pluginManager.registerEvents(PlayerListener(campfireManager), this)
+        registerListeners(
+            CustomEventListener(),
+            PlayerListener(this, campfireManager)
+        )
 
         val tempHandler = TempHandler() //TODO: Modify temps here in various places :thumbs_up:
 
