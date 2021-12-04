@@ -11,10 +11,4 @@ class EverWinter : JavaPlugin(), ModuleBase {
         // Plugin startup logic
         registerCommand(TestCommand())
     }
-
-    override fun onDisable() {
-        super.onDisable()
-    }
-
-
 }
