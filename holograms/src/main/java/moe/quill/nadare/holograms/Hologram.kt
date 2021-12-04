@@ -16,7 +16,7 @@ interface Hologram {
     //Entity Management
     val entities: MutableList<AreaEffectCloud>
 
-    fun addEntry(entry: Entry) {
+    fun addEntry(vararg entry: Entry) {
         entries += entry
         update()
     }
@@ -25,6 +25,7 @@ interface Hologram {
         entries -= entry
         update()
     }
+
 
     fun update() {
         //IF we have no entries don't really do anything
@@ -66,6 +67,18 @@ interface Hologram {
             line.ticksLived = Int.MAX_VALUE
             line.radius = 0f
         } as AreaEffectCloud
+    }
+
+
+    fun clear() {
+        entries.clear()
+        update()
+    }
+
+    fun remove(index: Int) {
+        if (index < 0 || index > entries.size - 1) return
+        entries.removeAt(index)
+        update()
     }
 
     fun destroy() {
