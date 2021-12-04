@@ -76,6 +76,7 @@
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
             <version>${protocollib.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

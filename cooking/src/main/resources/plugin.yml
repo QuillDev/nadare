@@ -2,5 +2,4 @@ name: Cooking
 version: '${project.version}'
 main: moe.quill.nadare.cooking.Cooking
 api-version: 1.18
-depend:
-  - EverWinter
+depend: ["ProtocolLib"]
