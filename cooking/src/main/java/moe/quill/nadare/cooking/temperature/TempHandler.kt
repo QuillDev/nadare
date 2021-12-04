@@ -4,17 +4,22 @@ import java.util.*
 
 class TempHandler {
     private val freezeStates = mutableMapOf<UUID, Int>()
-    private val maxTicks = 140
+    private val maxFreezeTicks = 140
 
-    fun setTicks(uuid: UUID, amount: Int) {
-        freezeStates.getOrPut(uuid) { amount.coerceAtMost(maxTicks).coerceAtLeast(0) }
+    fun setFreezeTicks(uuid: UUID, amount: Int) {
+        freezeStates[uuid] = amount.coerceAtMost(maxFreezeTicks).coerceAtLeast(0)
     }
 
-    fun modifyTicks(uuid: UUID, amount: Int) {
-        setTicks(uuid, getTicks(uuid) + amount)
+    fun modifyFreezeTicks(uuid: UUID, amount: Int) {
+        setFreezeTicks(uuid, getFreezeTicks(uuid) + amount)
     }
 
-    fun getTicks(uuid: UUID): Int {
+    fun getFreezeTicks(uuid: UUID): Int {
         return freezeStates.getOrDefault(uuid, 0)
     }
+
+    fun getWarmth(uuid: UUID) : Int{
+        return 1
+    }
+
 }

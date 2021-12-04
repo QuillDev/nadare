@@ -1,6 +1,7 @@
 package moe.quill.nadare.cooking
 
 import com.comphenix.protocol.ProtocolLibrary
+import moe.quill.nadare.bukkitcommon.BukkitLambda
 import moe.quill.nadare.cooking.core.CampfireManager
 import moe.quill.nadare.cooking.core.PlayerListener
 import moe.quill.nadare.cooking.events.CustomEventListener
@@ -23,6 +24,12 @@ class Cooking : JavaPlugin() {
 
         val uuid = UUID.randomUUID()
         ProtocolLibrary.getProtocolManager().addPacketListener(TempPacketListener(this, tempHandler))
+
+        BukkitLambda{
+            Bukkit.getOnlinePlayers().forEach{
+                tempHandler.modifyFreezeTicks(it.uniqueId, 5)
+            }
+        }.runTaskTimer(this, 0, 5)
     }
 
     override fun onDisable() {
