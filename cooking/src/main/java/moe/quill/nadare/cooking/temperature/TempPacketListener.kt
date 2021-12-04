@@ -17,13 +17,23 @@ import java.util.*
 class TempPacketListener(plugin: Plugin, private val tempHandler: TempHandler) :
     PacketAdapter(plugin, ListenerPriority.HIGHEST, PacketType.Play.Server.ENTITY_METADATA) {
 
+    private val freezeCache = mutableMapOf<UUID, Int>()
+
     init {
         BukkitLambda {
             Bukkit.getOnlinePlayers().forEach {
+                val uuid = it.uniqueId
+                val cached = freezeCache.getOrPut(uuid) { 0 }
+                val newTicks = tempHandler.getFreezeTicks(uuid)
+                if (cached == newTicks) return@forEach
+
+                //Create and send the packet
                 ProtocolLibrary.getProtocolManager().sendServerPacket(
                     it,
                     createFreezePacket(it, PacketContainer(PacketType.Play.Server.ENTITY_METADATA))
                 )
+
+                freezeCache[it.uniqueId] = newTicks
             }
         }.runTaskTimerAsynchronously(plugin, 0, 5)
     }
