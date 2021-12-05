@@ -1,6 +1,8 @@
 package moe.quill.nadare.cooking.core
 
 import com.destroystokyo.paper.profile.ProfileProperty
+import moe.quill.nadare.cooking.food.FoodItemGenerator
+import moe.quill.nadare.cooking.food.KeyManager
 import moe.quill.nadare.cooking.util.PrettyNameGen
 import moe.quill.nadare.entries.DynamicEntry
 import moe.quill.nadare.entries.StaticEntry
@@ -35,34 +37,34 @@ class EWCampfire(
 
     val listener: CampfireListener = CampfireListener(this)
 
-    val hologram = DynamicHologram(plugin, location.clone().add(.5,.5,.5))
+    private var hologram = initHologram()
 
     init {
         plugin.server.pluginManager.registerEvents(listener, plugin)
-        initHologram()
     }
 
-    fun initHologram() {
-        hologram.clear()
+    private fun initHologram() : Hologram{
+        if(hologram != null) hologram.clear()
+        val holo = DynamicHologram(plugin, location.clone().add(.5,.5,.5))
         if(!hasPot) {
-            hologram.addEntry(StaticEntry(Component.text("Add a cauldron for cooking.")))
-            return
+            holo.addEntry(StaticEntry(Component.text("Add a cauldron for cooking.")))
+            return holo
         }
-        hologram.addEntry(
+        holo.addEntry(
             DynamicEntry {
                 if (ingredients.isNotEmpty()) Component.text("Servings remaining: ${servings}")
                 else Component.text()
                     .append(Component.text("[").color(NamedTextColor.DARK_GRAY))
                     .append(Component.keybind("key.use").color(NamedTextColor.GREEN))
                     .append(Component.text("]").color(NamedTextColor.DARK_GRAY))
-                    .append(Component.text(" to add ingredients.").color(NamedTextColor.DARK_GRAY))
+                    .append(Component.text(" to add ingredients.").color(NamedTextColor.WHITE))
                     .build()
             },
             DynamicEntry{prettify(ingredients.getOrNull(0))},
             DynamicEntry{prettify(ingredients.getOrNull(1))},
-            DynamicEntry{prettify(ingredients.getOrNull(2))},
             DynamicEntry{prettify(ingredients.getOrNull(2))}
         )
+        return holo
     }
 
     fun prettify(material: Material?) : Component{
@@ -135,7 +137,7 @@ class EWCampfire(
             armorStand.equipment.helmet = head
         } as ArmorStand
         hasPot = true
-        initHologram()
+        hologram = initHologram()
     }
 
     fun destroy() {
@@ -150,7 +152,7 @@ class EWCampfire(
         val item = location.world.dropItemNaturally(location, ItemStack(Material.CAULDRON))
         item.isInvulnerable = true
         hasPot = false
-        initHologram()
+        hologram = initHologram()
     }
 
     fun grabServing(player: Player) {
@@ -162,12 +164,13 @@ class EWCampfire(
             player.sendActionBar(Component.text("This food seems a little cold...").color(NamedTextColor.GREEN))
             return
         }
-
+        val item = FoodItemGenerator(plugin, KeyManager(plugin)).generateFoodItem(this) ?: return
         servings -= 1
 
-        player.inventory.addItem(ItemStack(if (ingredients.contains(Material.POTION)) Material.SUSPICIOUS_STEW else Material.RABBIT_STEW))
-
+        val world = player.world
+        world.dropItemNaturally(player.location, item)
         location.world.playSound(location, Sound.BLOCK_HONEY_BLOCK_BREAK, 1f, 1f)
+
         if (servings != 0) return
         ingredients = ArrayList()
         servings = 3
