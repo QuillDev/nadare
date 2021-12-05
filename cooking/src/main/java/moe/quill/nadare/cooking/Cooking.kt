@@ -6,10 +6,11 @@ import moe.quill.nadare.bukkitcommon.ModuleBase
 import moe.quill.nadare.cooking.core.CampfireManager
 import moe.quill.nadare.cooking.core.PlayerListener
 import moe.quill.nadare.cooking.events.CustomEventListener
+import moe.quill.nadare.cooking.temperature.PlayerRespawnListener
 import moe.quill.nadare.cooking.temperature.TempHandler
+import moe.quill.nadare.cooking.temperature.WeatherChannel
 import moe.quill.nadare.cooking.temperature.TempPacketListener
 import org.bukkit.Bukkit
-import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
@@ -19,20 +20,24 @@ class Cooking : JavaPlugin(), ModuleBase {
     override fun onEnable() {
         // Plugin startup logic
         val campfireManager = CampfireManager(this)
+        val tempHandler = TempHandler(campfireManager)
+        val weatherChannel = WeatherChannel()
+        val tempPacketListener = TempPacketListener(this, tempHandler)
 
         registerListeners(
             CustomEventListener(),
-            PlayerListener(this, campfireManager)
+            PlayerListener(this, campfireManager),
+            PlayerRespawnListener(tempHandler, tempPacketListener)
         )
 
-        val tempHandler = TempHandler(campfireManager)
+
 
         val uuid = UUID.randomUUID()
-        ProtocolLibrary.getProtocolManager().addPacketListener(TempPacketListener(this, tempHandler))
+        ProtocolLibrary.getProtocolManager().addPacketListener(tempPacketListener)
 
         BukkitLambda{
             Bukkit.getOnlinePlayers().forEach{
-                tempHandler.modifyFreezeTicks(it.uniqueId, tempHandler.getFreezeDelta(it.uniqueId))
+                tempHandler.modifyFreezeTicks(it.uniqueId, weatherChannel.getFreezeDelta(it.uniqueId))
             }
         }.runTaskTimer(this, 0, 10)
     }

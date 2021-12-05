@@ -165,7 +165,6 @@ class EWCampfire(
 
         servings -= 1
 
-        var slot = player.inventory.heldItemSlot
         player.inventory.addItem(ItemStack(if (ingredients.contains(Material.POTION)) Material.SUSPICIOUS_STEW else Material.RABBIT_STEW))
 
         location.world.playSound(location, Sound.BLOCK_HONEY_BLOCK_BREAK, 1f, 1f)

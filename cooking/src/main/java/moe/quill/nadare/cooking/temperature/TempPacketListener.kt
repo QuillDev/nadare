@@ -30,7 +30,7 @@ class TempPacketListener(plugin: Plugin, private val tempHandler: TempHandler) :
                 //Create and send the packet
                 ProtocolLibrary.getProtocolManager().sendServerPacket(
                     it,
-                    createFreezePacket(it, PacketContainer(PacketType.Play.Server.ENTITY_METADATA))
+                    createFreezePacket(it)
                 )
 
                 freezeCache[it.uniqueId] = newTicks
@@ -48,7 +48,7 @@ class TempPacketListener(plugin: Plugin, private val tempHandler: TempHandler) :
         event.packet = createFreezePacket(entity, event.packet)
     }
 
-    private fun createFreezePacket(entity: Player, raw: PacketContainer): PacketContainer {
+    fun createFreezePacket(entity: Player, raw: PacketContainer = PacketContainer(PacketType.Play.Server.ENTITY_METADATA)): PacketContainer {
         val oldBits = WrappedDataWatcher.getEntityWatcher(entity)
 
         oldBits.setObject(7, (tempHandler.getFreezeTicks(entity.uniqueId) / tempHandler.freezeSaturation).toInt())
