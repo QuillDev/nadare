@@ -24,5 +24,6 @@ class TestAttributeListener : AttributeListener {
     @Attribute(name = "firefood")
     fun fireFood(event: AttributeConsumeEvent) {
         event.player.isVisualFire = true
+        event.player.damage(5.0)
     }
 }

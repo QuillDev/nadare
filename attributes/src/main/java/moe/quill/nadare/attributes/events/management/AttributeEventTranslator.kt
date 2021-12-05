@@ -1,6 +1,6 @@
 package moe.quill.nadare.attributes.events
 
-import moe.quill.nadare.attributes.attributes.AttributeRegistry
+import moe.quill.nadare.attributes.attributes.AttributeRegistryImpl
 import moe.quill.nadare.bukkitcommon.BukkitLambda
 import org.bukkit.Bukkit
 import org.bukkit.entity.*
@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.Plugin
 
-class AttributeEventTranslator(val registry: AttributeRegistry, val plugin: Plugin) : Listener {
+class AttributeEventTranslator(val registry: AttributeRegistryImpl, val plugin: Plugin) : Listener {
 
     //Cache arrows for arrow based events
     val arrowCache = mutableMapOf<Projectile, ItemStack>()
@@ -72,6 +72,9 @@ class AttributeEventTranslator(val registry: AttributeRegistry, val plugin: Plug
     @EventHandler(ignoreCancelled = true)
     fun onConsume(event: PlayerItemConsumeEvent) {
 
+        Bukkit.getLogger().info("fsadasdg")
+        Bukkit.getLogger().info(("" + registry.parameterBindings[AttributeConsumeEvent::class]?.size))
+        Bukkit.getLogger().info(event.item.itemMeta?.persistentDataContainer.toString())
         val item = event.item
         val dataContainer = item.itemMeta?.persistentDataContainer ?: return
 
@@ -79,6 +82,7 @@ class AttributeEventTranslator(val registry: AttributeRegistry, val plugin: Plug
         registry.parameterBindings[AttributeConsumeEvent::class]?.let { it ->
             it.forEach { data ->
                 if (!dataContainer.has(data.key, PersistentDataType.INTEGER)) return@forEach
+                Bukkit.getLogger().info("yyyy")
                 data.runner.call(data.parentInstance, attributeEvent)
             }
         }
