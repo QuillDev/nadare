@@ -1,0 +1,4 @@
+name: Attributes
+version: '${project.version}'
+main: moe.quill.nadare.attributes.AttributePlugin
+api-version: 1.18

@@ -15,6 +15,7 @@
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!--Kotlin-->
         <kotlin.version>1.6.0</kotlin.version>
@@ -31,6 +32,7 @@
         <module>holograms</module>
         <module>cooking</module>
         <module>bukkit-common</module>
+        <module>attributes</module>
     </modules>
 
     <dependencies>

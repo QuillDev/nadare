@@ -1,5 +1,6 @@
 package moe.quill.nadare.everwinter;
 
+import moe.quill.nadare.attributes.attributes.AttributeRegistry
 import moe.quill.nadare.bukkitcommon.ModuleBase
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
