@@ -2,5 +2,6 @@ package moe.quill.nadare.attributes.attributes
 
 annotation class Attribute(
     val name: String,
-    val level: Int,
+    val minLevel: Int = 1,
+    val maxLevel: Int = 5
 )

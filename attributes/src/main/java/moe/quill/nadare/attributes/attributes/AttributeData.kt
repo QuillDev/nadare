@@ -7,9 +7,9 @@ import kotlin.reflect.KFunction
 
 class AttributeData(
     val name: String,
-    val level: Int,
+    val minLevel: Int,
+    val maxLevel: Int,
     val key: NamespacedKey,
-    val parameterType: KClass<*>,
     val runner: KFunction<*>,
     val parentInstance: AttributeListener
 )

@@ -1,8 +1,11 @@
 package moe.quill.nadare.attributes.attributes
 
+import moe.quill.nadare.attributes.events.AttributeContactDamageEvent
 import moe.quill.nadare.attributes.events.AttributeListener
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
+import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.Plugin
 import kotlin.reflect.KClass
 import kotlin.reflect.full.declaredMemberFunctions
@@ -32,9 +35,9 @@ class AttributeRegistry(val plugin: Plugin) {
                     //Build the attribute data for this attribute
                     val data = AttributeData(
                         annotation.name,
-                        annotation.level,
+                        annotation.minLevel,
+                        annotation.maxLevel,
                         NamespacedKey(plugin, annotation.name),
-                        klass,
                         it,
                         listener
                     )
