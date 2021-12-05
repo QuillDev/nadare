@@ -1,4 +1,5 @@
 name: EverWinter
 version: '${project.version}'
 main: moe.quill.nadare.everwinter.EverWinter
-api-version: 1.17
+api-version: 1.18
+depend: [ "Attributes" ]

@@ -1,5 +1,0 @@
-name: Kold
-version: '${project.version}'
-main: moe.quill.nadare.kold.Kold
-api-version: 1.18
-load: POSTWORLD

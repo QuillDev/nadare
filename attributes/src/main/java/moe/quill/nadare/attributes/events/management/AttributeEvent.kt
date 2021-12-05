@@ -1,4 +1,4 @@
-package moe.quill.nadare.attributes.events
+package moe.quill.nadare.attributes.events.management
 
 import moe.quill.nadare.attributes.attributes.AttributeType
 

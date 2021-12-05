@@ -33,6 +33,7 @@
         <module>cooking</module>
         <module>bukkit-common</module>
         <module>attributes</module>
+        <module>kold</module>
     </modules>
 
     <dependencies>

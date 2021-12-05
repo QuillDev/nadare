@@ -1,8 +1,7 @@
 package moe.quill.nadare.attributes.attributes
 
-import moe.quill.nadare.attributes.events.AttributeListener
+import moe.quill.nadare.attributes.events.management.AttributeListener
 import org.bukkit.NamespacedKey
-import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 
 class AttributeData(

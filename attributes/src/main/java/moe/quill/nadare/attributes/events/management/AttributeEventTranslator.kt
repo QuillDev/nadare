@@ -1,6 +1,9 @@
-package moe.quill.nadare.attributes.events
+package moe.quill.nadare.attributes.events.management
 
 import moe.quill.nadare.attributes.attributes.AttributeRegistryImpl
+import moe.quill.nadare.attributes.events.AttributeConsumeEvent
+import moe.quill.nadare.attributes.events.AttributeContactDamageEvent
+import moe.quill.nadare.attributes.events.AttributeProjectileDamageEvent
 import moe.quill.nadare.bukkitcommon.BukkitLambda
 import org.bukkit.Bukkit
 import org.bukkit.entity.*
@@ -71,10 +74,6 @@ class AttributeEventTranslator(val registry: AttributeRegistryImpl, val plugin: 
 
     @EventHandler(ignoreCancelled = true)
     fun onConsume(event: PlayerItemConsumeEvent) {
-
-        Bukkit.getLogger().info("fsadasdg")
-        Bukkit.getLogger().info(("" + registry.parameterBindings[AttributeConsumeEvent::class]?.size))
-        Bukkit.getLogger().info(event.item.itemMeta?.persistentDataContainer.toString())
         val item = event.item
         val dataContainer = item.itemMeta?.persistentDataContainer ?: return
 
@@ -82,7 +81,6 @@ class AttributeEventTranslator(val registry: AttributeRegistryImpl, val plugin: 
         registry.parameterBindings[AttributeConsumeEvent::class]?.let { it ->
             it.forEach { data ->
                 if (!dataContainer.has(data.key, PersistentDataType.INTEGER)) return@forEach
-                Bukkit.getLogger().info("yyyy")
                 data.runner.call(data.parentInstance, attributeEvent)
             }
         }

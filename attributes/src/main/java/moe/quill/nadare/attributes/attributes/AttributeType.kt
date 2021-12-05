@@ -1,4 +1,7 @@
 package moe.quill.nadare.attributes.attributes
 
-class AttributeType {
+enum class AttributeType {
+    CONSUME,
+    CONTACT_DAMAGE,
+    PROJECTILE_DAMAGE
 }
