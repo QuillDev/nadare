@@ -51,7 +51,7 @@ class TempPacketListener(plugin: Plugin, private val tempHandler: TempHandler) :
     private fun createFreezePacket(entity: Player, raw: PacketContainer): PacketContainer {
         val oldBits = WrappedDataWatcher.getEntityWatcher(entity)
 
-        oldBits.setObject(7, tempHandler.getFreezeTicks(entity.uniqueId))
+        oldBits.setObject(7, (tempHandler.getFreezeTicks(entity.uniqueId) / tempHandler.freezeSaturation).toInt())
         raw.watchableCollectionModifier.write(0, oldBits.watchableObjects)
 
         return raw

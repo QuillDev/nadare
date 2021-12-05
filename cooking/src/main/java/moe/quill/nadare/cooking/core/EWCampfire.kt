@@ -60,6 +60,7 @@ class EWCampfire(
             },
             DynamicEntry{prettify(ingredients.getOrNull(0))},
             DynamicEntry{prettify(ingredients.getOrNull(1))},
+            DynamicEntry{prettify(ingredients.getOrNull(2))},
             DynamicEntry{prettify(ingredients.getOrNull(2))}
         )
     }

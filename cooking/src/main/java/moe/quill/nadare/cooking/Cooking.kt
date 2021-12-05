@@ -25,14 +25,14 @@ class Cooking : JavaPlugin(), ModuleBase {
             PlayerListener(this, campfireManager)
         )
 
-        val tempHandler = TempHandler() //TODO: Modify temps here in various places :thumbs_up:
+        val tempHandler = TempHandler(campfireManager)
 
         val uuid = UUID.randomUUID()
         ProtocolLibrary.getProtocolManager().addPacketListener(TempPacketListener(this, tempHandler))
 
         BukkitLambda{
             Bukkit.getOnlinePlayers().forEach{
-                tempHandler.modifyFreezeTicks(it.uniqueId, 1)
+                tempHandler.modifyFreezeTicks(it.uniqueId, tempHandler.getFreezeDelta(it.uniqueId))
             }
         }.runTaskTimer(this, 0, 10)
     }
