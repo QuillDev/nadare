@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>everwinter</artifactId>
+    <artifactId>attributes</artifactId>
 
-    <name>everwinter</name>
+    <name>Attributes</name>
 
     <build>
         <plugins>
@@ -68,8 +68,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
             <groupId>moe.quill.nadare</groupId>
-            <artifactId>holograms</artifactId>
+            <artifactId>bukkit-common</artifactId>
             <version>0.0.1</version>
         </dependency>
     </dependencies>
