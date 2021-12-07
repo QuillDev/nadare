@@ -51,7 +51,12 @@ class ItemBuilder(private val item: ItemStack) {
 
     //Modify lore
     fun lore(vararg components: Component): ItemBuilder {
-        meta()?.let { it.lore(components.toList()); meta(it) }
+        lore(components.toList())
+        return this
+    }
+
+    fun lore(components: List<Component>): ItemBuilder {
+        meta()?.let { it.lore(components); meta(it) }
         return this
     }
 
