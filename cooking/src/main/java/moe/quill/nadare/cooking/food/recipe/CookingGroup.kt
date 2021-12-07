@@ -1,42 +1,42 @@
 package moe.quill.nadare.cooking.food.recipe
 
-enum class CookingGroup(vararg cookables: Cookable) : CookableSupplier{
-    GOLDEN(Cookable.GOLDEN_APPLE,Cookable.GOLDEN_CARROT, Cookable.ENCHANTED_GOLDEN_APPLE),
+enum class CookingGroup(vararg cookables: Ingredient) : Cookable{
+    GOLDEN(Ingredient.GOLDEN_APPLE,Ingredient.GOLDEN_CARROT, Ingredient.ENCHANTED_GOLDEN_APPLE),
     MEAT(
-        Cookable.COD, Cookable.SALMON, Cookable.BEEF, Cookable.CHICKEN,
-        Cookable.MUTTON, Cookable.RABBIT, Cookable.PORKCHOP, Cookable.TROPICAL_FISH
+        Ingredient.COD, Ingredient.SALMON, Ingredient.BEEF, Ingredient.CHICKEN,
+        Ingredient.MUTTON, Ingredient.RABBIT, Ingredient.PORKCHOP, Ingredient.TROPICAL_FISH
     ),
     COOKED(
-        Cookable.COOKED_COD, Cookable.COOKED_SALMON, Cookable.COOKED_BEEF, Cookable.COOKED_CHICKEN,
-        Cookable.COOKED_MUTTON, Cookable.COOKED_RABBIT, Cookable.BAKED_POTATO, Cookable.COOKED_PORKCHOP
+        Ingredient.COOKED_COD, Ingredient.COOKED_SALMON, Ingredient.COOKED_BEEF, Ingredient.COOKED_CHICKEN,
+        Ingredient.COOKED_MUTTON, Ingredient.COOKED_RABBIT, Ingredient.BAKED_POTATO, Ingredient.COOKED_PORKCHOP
     ),
     VEGETABLE(
-        Cookable.POTATO, Cookable.CARROT, Cookable.BEETROOT, Cookable.DRIED_KELP,
-        Cookable.CACTUS, Cookable.BAMBOO, Cookable.WARPED_FUNGUS, Cookable.CRIMSON_FUNGUS,
-        Cookable.BROWN_MUSHROOM, Cookable.RED_MUSHROOM, Cookable.KELP, Cookable.SEA_PICKLE,
-        Cookable.SEAGRASS, Cookable.PUMPKIN, Cookable.CRIMSON_ROOTS, Cookable.HANGING_ROOTS,
-        Cookable.WARPED_ROOTS
+        Ingredient.POTATO, Ingredient.CARROT, Ingredient.BEETROOT, Ingredient.DRIED_KELP,
+        Ingredient.CACTUS, Ingredient.BAMBOO, Ingredient.WARPED_FUNGUS, Ingredient.CRIMSON_FUNGUS,
+        Ingredient.BROWN_MUSHROOM, Ingredient.RED_MUSHROOM, Ingredient.KELP, Ingredient.SEA_PICKLE,
+        Ingredient.SEAGRASS, Ingredient.PUMPKIN, Ingredient.CRIMSON_ROOTS, Ingredient.HANGING_ROOTS,
+        Ingredient.WARPED_ROOTS
     ),
-    FRUIT(Cookable.CHORUS_FRUIT, Cookable.SWEET_BERRIES, Cookable.GLOW_BERRIES, Cookable.MELON_SLICE, Cookable.POPPED_CHORUS_FRUIT),
-    SPOILED(Cookable.ROTTEN_FLESH, Cookable.POISONOUS_POTATO, Cookable.SPIDER_EYE, Cookable.FERMENTED_SPIDER_EYE),
-    BAKED(Cookable.COOKIE, Cookable.BREAD, Cookable.BAKED_POTATO, Cookable.CAKE),
-    FISH(Cookable.COD, Cookable.SALMON, Cookable.PUFFERFISH, Cookable.TROPICAL_FISH),
-    BERRIES(Cookable.GLOW_BERRIES, Cookable.SWEET_BERRIES),
+    FRUIT(Ingredient.CHORUS_FRUIT, Ingredient.SWEET_BERRIES, Ingredient.GLOW_BERRIES, Ingredient.MELON_SLICE, Ingredient.POPPED_CHORUS_FRUIT),
+    SPOILED(Ingredient.ROTTEN_FLESH, Ingredient.POISONOUS_POTATO, Ingredient.SPIDER_EYE, Ingredient.FERMENTED_SPIDER_EYE),
+    BAKED(Ingredient.COOKIE, Ingredient.BREAD, Ingredient.BAKED_POTATO, Ingredient.CAKE),
+    FISH(Ingredient.COD, Ingredient.SALMON, Ingredient.PUFFERFISH, Ingredient.TROPICAL_FISH),
+    BERRIES(Ingredient.GLOW_BERRIES, Ingredient.SWEET_BERRIES),
     SWEET(
-        Cookable.GLOW_BERRIES, Cookable.SWEET_BERRIES, Cookable.HONEY_BOTTLE, Cookable.MELON_SLICE,
-        Cookable.APPLE, Cookable.PUMPKIN_PIE, Cookable.SUGAR_CANE, Cookable.SUGAR, Cookable.CAKE
+        Ingredient.GLOW_BERRIES, Ingredient.SWEET_BERRIES, Ingredient.HONEY_BOTTLE, Ingredient.MELON_SLICE,
+        Ingredient.APPLE, Ingredient.PUMPKIN_PIE, Ingredient.SUGAR_CANE, Ingredient.SUGAR, Ingredient.CAKE
     ),
-    EGG(Cookable.EGG, Cookable.DRAGON_EGG, Cookable.TURTLE_EGG),
-    WATER(Cookable.ICE, Cookable.BLUE_ICE, Cookable.PACKED_ICE, Cookable.SNOWBALL, Cookable.POTION),
-    MUSHROOM(Cookable.CRIMSON_FUNGUS, Cookable.WARPED_FUNGUS, Cookable.RED_MUSHROOM, Cookable.BROWN_MUSHROOM),
-    ROOT(Cookable.WARPED_ROOTS, Cookable.HANGING_ROOTS, Cookable.CRIMSON_ROOTS, Cookable.BEETROOT),
-    SHELLS(Cookable.NAUTILUS_SHELL, Cookable.SHULKER_SHELL, Cookable.SCUTE),
+    EGG(Ingredient.EGG, Ingredient.DRAGON_EGG, Ingredient.TURTLE_EGG),
+    WATER(Ingredient.ICE, Ingredient.BLUE_ICE, Ingredient.PACKED_ICE, Ingredient.SNOWBALL, Ingredient.POTION),
+    MUSHROOM(Ingredient.CRIMSON_FUNGUS, Ingredient.WARPED_FUNGUS, Ingredient.RED_MUSHROOM, Ingredient.BROWN_MUSHROOM),
+    ROOT(Ingredient.WARPED_ROOTS, Ingredient.HANGING_ROOTS, Ingredient.CRIMSON_ROOTS, Ingredient.BEETROOT),
+    SHELLS(Ingredient.NAUTILUS_SHELL, Ingredient.SHULKER_SHELL, Ingredient.SCUTE),
     PLANT(
-        Cookable.KELP, Cookable.DRIED_KELP, Cookable.SEAGRASS, Cookable.BAMBOO,
-        Cookable.WARPED_ROOTS, Cookable.HANGING_ROOTS, Cookable.CRIMSON_ROOTS, Cookable.BEETROOT,
-        Cookable.CACTUS, Cookable.SEA_PICKLE,Cookable.SUGAR_CANE
+        Ingredient.KELP, Ingredient.DRIED_KELP, Ingredient.SEAGRASS, Ingredient.BAMBOO,
+        Ingredient.WARPED_ROOTS, Ingredient.HANGING_ROOTS, Ingredient.CRIMSON_ROOTS, Ingredient.BEETROOT,
+        Ingredient.CACTUS, Ingredient.SEA_PICKLE,Ingredient.SUGAR_CANE
     );
 
-    override val cookables = cookables.toList()
+    override val ingredients = cookables.toList()
 
 }

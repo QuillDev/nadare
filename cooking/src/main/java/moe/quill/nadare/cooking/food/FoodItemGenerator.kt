@@ -2,21 +2,13 @@ package moe.quill.nadare.cooking.food
 
 import moe.quill.nadare.bukkitcommon.lib.items.ItemBuilder
 import moe.quill.nadare.cooking.core.EWCampfire
-import moe.quill.nadare.cooking.food.recipe.Cookable
 import moe.quill.nadare.cooking.food.recipe.CookingGroup
 import moe.quill.nadare.cooking.food.recipe.CookingRecipe
 import moe.quill.nadare.cooking.util.PrettyNameGen
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
-import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.meta.ItemMeta
-import org.bukkit.inventory.meta.PotionMeta
-import org.bukkit.persistence.PersistentDataType
-import org.bukkit.plugin.java.JavaPlugin
-import org.bukkit.potion.PotionEffectType
 
 class FoodItemGenerator() {
 
@@ -34,7 +26,7 @@ class FoodItemGenerator() {
         val stew = ItemStack(Material.SUSPICIOUS_STEW)
         val food = ItemStack(Material.RABBIT_STEW)
 
-        val item = if (CookingGroup.WATER.matchesOne(ingredients)) stew else food
+        val item = if (CookingGroup.WATER.matchesAny(ingredients)) stew else food
         var lore = mutableListOf<Component>(Component.text("Created From: ").color(NamedTextColor.WHITE))
 
         ingredients.forEach {

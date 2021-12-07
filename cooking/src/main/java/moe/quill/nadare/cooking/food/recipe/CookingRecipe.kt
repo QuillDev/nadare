@@ -1,13 +1,8 @@
 package moe.quill.nadare.cooking.food.recipe
 
-import jdk.jfr.Description
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.format.TextColor
 import org.bukkit.Bukkit
-import org.bukkit.Material
-import org.bukkit.entity.Player
-import org.bukkit.util.io.BukkitObjectInputStream
 
 enum class CookingRecipe(val prefix: Component, val description: List<Component>, vararg choices: CookingChoice) {
     GILDED(
@@ -59,22 +54,35 @@ enum class CookingRecipe(val prefix: Component, val description: List<Component>
 
     val choices = choices.toList()
 
-    companion object{
+    companion object {
+
         @JvmStatic
-        fun findMatches(ingredients: List<Cookable?>) : List<CookingRecipe> {
-            var recipies = mutableListOf<CookingRecipe>()
-            values().forEach {
-                var test = true
-                it.choices.forEach loop@{choice ->
-                    if (!choice.matchesOne(ingredients)) {
-                        test = false
-                        return@loop
-                    }
+        fun findMatches(cookable: List<Cookable?>): List<CookingRecipe> {
+            val validCookables = cookable.filterNotNull()
+            return values().filter { recipe ->
+                Bukkit.getLogger().info("Checking ${recipe.name}")
+                recipe.choices.forEach { choice ->
+                    if (choice.matchesAny(validCookables)) return@filter true
                 }
-                Bukkit.getLogger().info("Testing ${it.name}: ${test}")
-                if(test) recipies.add(it)
+                return@filter false
             }
-            return recipies
         }
+
+//        @JvmStatic
+//        fun findMatches(ingredients: List<Cookable?>) : List<CookingRecipe> {
+//            var recipies = mutableListOf<CookingRecipe>()
+//            values().forEach {
+//                var test = true
+//                it.choices.forEach loop@{choice ->
+//                    if (!choice.matchesOne(ingredients)) {
+//                        test = false
+//                        return@loop
+//                    }
+//                }
+//                Bukkit.getLogger().info("Testing ${it.name}: ${test}")
+//                if(test) recipies.add(it)
+//            }
+//            return recipies
+//        }
     }
 }

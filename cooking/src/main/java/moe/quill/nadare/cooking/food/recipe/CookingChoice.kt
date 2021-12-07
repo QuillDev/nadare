@@ -1,17 +1,16 @@
 package moe.quill.nadare.cooking.food.recipe
 
-import org.bukkit.Material
-
-class CookingChoice(vararg cookables: CookableSupplier) {
+class CookingChoice(vararg cookables: Cookable) {
     val cookables = cookables.toList()
 
-    fun matchesOne(ingredients: List<Cookable?>) : Boolean{
-        ingredients.forEach{
-            it ?: return@forEach
-            if (cookables.contains(it)) {
-                return true
+    fun matchesAny(cookables: List<Cookable?>): Boolean {
+
+        cookables.filterNotNull().forEach { cookable ->
+            this.cookables.forEach { localCookable ->
+                if (localCookable.matchesAny(cookable)) return true
             }
         }
         return false
     }
+
 }

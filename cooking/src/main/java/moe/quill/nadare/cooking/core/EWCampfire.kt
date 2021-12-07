@@ -2,9 +2,8 @@ package moe.quill.nadare.cooking.core
 
 import com.destroystokyo.paper.profile.ProfileProperty
 import moe.quill.nadare.bukkitcommon.lib.ModuleBase
-import moe.quill.nadare.cooking.Cooking
 import moe.quill.nadare.cooking.food.FoodItemGenerator
-import moe.quill.nadare.cooking.food.recipe.Cookable
+import moe.quill.nadare.cooking.food.recipe.Ingredient
 import moe.quill.nadare.cooking.util.PrettyNameGen
 import moe.quill.nadare.entries.DynamicEntry
 import moe.quill.nadare.entries.StaticEntry
@@ -34,7 +33,7 @@ class EWCampfire(
     var pot: ArmorStand? = null
     val SIZE: Int = 3
     var servings = 3
-    var ingredients: MutableList<Cookable?> = ArrayList()
+    var ingredients: MutableList<Ingredient?> = ArrayList()
 
     val listener: CampfireListener = CampfireListener(this)
 
@@ -68,7 +67,7 @@ class EWCampfire(
         return holo
     }
 
-    fun prettify(cookable: Cookable?) : Component{
+    fun prettify(cookable: Ingredient?) : Component{
         cookable?: return Component.text("[Empty Ingredient Slot]")
         return Component.text(PrettyNameGen.asPretty(cookable.material))
     }
@@ -78,7 +77,7 @@ class EWCampfire(
         if (ingredients.size == SIZE) return
 
         val item = player.inventory.itemInMainHand
-        ingredients.add(Cookable.valueOf(item.type))
+        ingredients.add(Ingredient.valueOf(item.type))
 
         item.subtract()
 
