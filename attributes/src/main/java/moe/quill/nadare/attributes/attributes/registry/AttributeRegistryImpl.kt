@@ -1,5 +1,8 @@
-package moe.quill.nadare.attributes.attributes
+package moe.quill.nadare.attributes.attributes.registry
 
+import moe.quill.nadare.attributes.attributes.Attribute
+import moe.quill.nadare.attributes.attributes.AttributeData
+import moe.quill.nadare.attributes.attributes.AttributeType
 import moe.quill.nadare.attributes.events.AttributeConsumeEvent
 import moe.quill.nadare.attributes.events.AttributeContactDamageEvent
 import moe.quill.nadare.attributes.events.AttributeProjectileDamageEvent

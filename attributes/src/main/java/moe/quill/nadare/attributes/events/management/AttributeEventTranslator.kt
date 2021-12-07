@@ -1,6 +1,6 @@
 package moe.quill.nadare.attributes.events.management
 
-import moe.quill.nadare.attributes.attributes.AttributeRegistryImpl
+import moe.quill.nadare.attributes.attributes.registry.AttributeRegistryImpl
 import moe.quill.nadare.attributes.events.AttributeConsumeEvent
 import moe.quill.nadare.attributes.events.AttributeContactDamageEvent
 import moe.quill.nadare.attributes.events.AttributeProjectileDamageEvent
