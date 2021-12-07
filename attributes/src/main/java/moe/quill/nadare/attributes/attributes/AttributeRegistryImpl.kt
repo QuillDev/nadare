@@ -4,6 +4,7 @@ import moe.quill.nadare.attributes.events.AttributeConsumeEvent
 import moe.quill.nadare.attributes.events.AttributeContactDamageEvent
 import moe.quill.nadare.attributes.events.AttributeProjectileDamageEvent
 import moe.quill.nadare.attributes.events.management.AttributeListener
+import moe.quill.nadare.bukkitcommon.KeyManager
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.plugin.Plugin
@@ -13,6 +14,8 @@ import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.hasAnnotation
 
 class AttributeRegistryImpl(private val plugin: Plugin) : AttributeRegistry {
+
+    override val keyManager = KeyManager()
 
     val listenerBindings = mutableMapOf<KClass<out AttributeListener>, List<AttributeData>>()
     val parameterBindings = mutableMapOf<KClass<*>, MutableList<AttributeData>>()
@@ -39,12 +42,14 @@ class AttributeRegistryImpl(private val plugin: Plugin) : AttributeRegistry {
 
                     val klass = it.parameters[1].type.classifier as? KClass<*> ?: return@map null
 
+                    val key = NamespacedKey(plugin, annotation.name)
+                    keyManager.addKey(key)
                     //Build the attribute data for this attribute
                     val data = AttributeData(
                         annotation.name,
                         annotation.minLevel,
                         annotation.maxLevel,
-                        NamespacedKey(plugin, annotation.name),
+                        key,
                         it,
                         listener
                     )
