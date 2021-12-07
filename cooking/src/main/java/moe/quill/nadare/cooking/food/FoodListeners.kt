@@ -2,10 +2,9 @@ package moe.quill.nadare.cooking.food
 
 import moe.quill.nadare.attributes.attributes.Attribute
 import moe.quill.nadare.attributes.events.AttributeConsumeEvent
-import moe.quill.nadare.attributes.events.AttributeListener
+import moe.quill.nadare.attributes.events.management.AttributeListener
 import org.bukkit.Bukkit
 import org.bukkit.Material
-import org.bukkit.potion.Potion
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 

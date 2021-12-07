@@ -2,7 +2,6 @@ package moe.quill.nadare.cooking
 
 import com.comphenix.protocol.ProtocolLibrary
 import moe.quill.nadare.attributes.attributes.AttributeRegistry
-import moe.quill.nadare.attributes.test.TestAttributeListener
 import moe.quill.nadare.bukkitcommon.BukkitLambda
 import moe.quill.nadare.bukkitcommon.ModuleBase
 import moe.quill.nadare.cooking.core.CampfireManager
@@ -39,8 +38,6 @@ class Cooking : JavaPlugin(), ModuleBase {
 
         this.registry = server.servicesManager.load(AttributeRegistry::class.java) ?: return
         registry.register(FoodListeners(KeyManager(this)))
-
-
 
         BukkitLambda{
             Bukkit.getOnlinePlayers().forEach{
