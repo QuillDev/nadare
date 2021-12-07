@@ -1,4 +1,4 @@
-package moe.quill.nadare.bukkitcommon
+package moe.quill.nadare.bukkitcommon.lib
 
 import org.bukkit.scheduler.BukkitRunnable
 

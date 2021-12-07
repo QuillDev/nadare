@@ -1,4 +1,4 @@
-package moe.quill.nadare.bukkitcommon.items
+package moe.quill.nadare.bukkitcommon.lib.items
 
 import com.destroystokyo.paper.profile.ProfileProperty
 import net.kyori.adventure.text.Component

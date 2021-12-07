@@ -1,0 +1,4 @@
+name: BukkitCommon
+version: '${project.version}'
+main: moe.quill.nadare.bukkitcommon.BukkitCommon
+api-version: 1.18

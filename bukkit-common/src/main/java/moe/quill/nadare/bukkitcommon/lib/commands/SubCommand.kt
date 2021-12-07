@@ -1,6 +1,4 @@
-package moe.quill.nadare.bukkitcommon.commands
-
-import org.bukkit.command.CommandSender
+package moe.quill.nadare.bukkitcommon.lib.commands
 
 interface SubCommand : CommandBase {
     val name: String

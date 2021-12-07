@@ -2,8 +2,8 @@ package moe.quill.nadare.cooking
 
 import com.comphenix.protocol.ProtocolLibrary
 import moe.quill.nadare.attributes.attributes.AttributeRegistry
-import moe.quill.nadare.bukkitcommon.BukkitLambda
-import moe.quill.nadare.bukkitcommon.ModuleBase
+import moe.quill.nadare.bukkitcommon.lib.BukkitLambda
+import moe.quill.nadare.bukkitcommon.lib.ModuleBase
 import moe.quill.nadare.cooking.core.CampfireManager
 import moe.quill.nadare.cooking.core.PlayerListener
 import moe.quill.nadare.cooking.events.CustomEventListener

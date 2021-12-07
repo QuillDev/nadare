@@ -1,6 +1,6 @@
 package moe.quill.nadare.everwinter
 
-import moe.quill.nadare.bukkitcommon.commands.Command
+import moe.quill.nadare.bukkitcommon.lib.commands.Command
 import net.kyori.adventure.text.Component
 import org.bukkit.command.CommandSender
 

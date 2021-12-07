@@ -2,10 +2,7 @@ package moe.quill.nadare.everwinter;
 
 import moe.quill.nadare.attributes.attributes.AttributeRegistry
 import moe.quill.nadare.attributes.attributes.AttributeType
-import moe.quill.nadare.attributes.events.AttributeConsumeEvent
-import moe.quill.nadare.attributes.events.AttributeContactDamageEvent
-import moe.quill.nadare.attributes.events.AttributeProjectileDamageEvent
-import moe.quill.nadare.bukkitcommon.ModuleBase
+import moe.quill.nadare.bukkitcommon.lib.ModuleBase
 import moe.quill.nadare.everwinter.test.TestAttributeListener
 import org.bukkit.Bukkit
 import org.bukkit.Material
