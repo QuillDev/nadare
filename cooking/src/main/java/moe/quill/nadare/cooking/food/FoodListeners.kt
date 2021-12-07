@@ -81,8 +81,4 @@ class FoodListeners(private val keyManager: KeyManager) : AttributeListener {
         }
     }
 
-    private fun ingredientMatch(ingredients: List<Material>,vararg recipe: Material) : Boolean{
-        if (recipe.size != 3) return false
-        return ingredients.contains(recipe[0]) && ingredients.contains(recipe[1]) && ingredients.contains(recipe[2])
-    }
 }

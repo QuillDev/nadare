@@ -21,6 +21,7 @@ import java.util.*
 
 class Cooking : JavaPlugin(), ModuleBase {
     override val plugin = this
+    lateinit var registry: AttributeRegistry
 
     override fun onEnable() {
         // Plugin startup logic
@@ -34,14 +35,12 @@ class Cooking : JavaPlugin(), ModuleBase {
             PlayerListener(this, campfireManager),
             PlayerRespawnListener(tempHandler, tempPacketListener),
         )
+        ProtocolLibrary.getProtocolManager().addPacketListener(tempPacketListener)
 
-        val registry = AttributeRegistry(this)
-        server.servicesManager.register(AttributeRegistry::class.java, registry, this, ServicePriority.Highest)
-
+        this.registry = server.servicesManager.load(AttributeRegistry::class.java) ?: return
         registry.register(FoodListeners(KeyManager(this)))
 
-        val uuid = UUID.randomUUID()
-        ProtocolLibrary.getProtocolManager().addPacketListener(tempPacketListener)
+
 
         BukkitLambda{
             Bukkit.getOnlinePlayers().forEach{

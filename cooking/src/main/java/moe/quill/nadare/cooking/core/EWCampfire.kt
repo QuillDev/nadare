@@ -79,8 +79,7 @@ class EWCampfire(
         val item = player.inventory.itemInMainHand
         ingredients.add(item.type)
 
-        if (item.amount > 1) item.subtract()
-        else player.inventory.remove(item)
+        item.subtract()
 
         val world = location.world
 
@@ -149,8 +148,7 @@ class EWCampfire(
         pot?.isInvulnerable = false
         pot?.remove()
         if (!hasPot) return
-        val item = location.world.dropItemNaturally(location, ItemStack(Material.CAULDRON))
-        item.isInvulnerable = true
+        location.world.dropItemNaturally(location, ItemStack(Material.CAULDRON)).isInvulnerable = true
         hasPot = false
         hologram = initHologram()
     }
@@ -168,7 +166,7 @@ class EWCampfire(
         servings -= 1
 
         val world = player.world
-        world.dropItemNaturally(player.location, item)
+        world.dropItemNaturally(location, item).isInvulnerable = true
         location.world.playSound(location, Sound.BLOCK_HONEY_BLOCK_BREAK, 1f, 1f)
 
         if (servings != 0) return

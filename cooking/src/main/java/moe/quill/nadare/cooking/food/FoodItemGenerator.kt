@@ -17,9 +17,9 @@ import org.bukkit.potion.PotionEffectType
 class FoodItemGenerator(private val plugin: JavaPlugin, private val keyManager: KeyManager) {
 
     private val adjMap = mapOf<Int, String>(
-        1 to "Heartless ",
-        2 to "Hearty ",
-        3 to "Heartful "
+        1 to "Small ",
+        2 to "Medium ",
+        3 to "Large "
     )
 
     fun generateFoodItem(campfire: EWCampfire): ItemStack? {
@@ -56,5 +56,10 @@ class FoodItemGenerator(private val plugin: JavaPlugin, private val keyManager: 
 
     private fun prettify(material: Material): Component {
         return Component.text(PrettyNameGen.asPretty(material))
+    }
+
+    private fun ingredientMatch(ingredients: List<Material>,vararg recipe: Material) : Boolean{
+        if (recipe.size != 3) return false
+        return ingredients.contains(recipe[0]) && ingredients.contains(recipe[1]) && ingredients.contains(recipe[2])
     }
 }
