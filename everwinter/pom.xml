@@ -76,6 +76,7 @@
             <groupId>moe.quill.nadare</groupId>
             <artifactId>attributes</artifactId>
             <version>0.0.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
