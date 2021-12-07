@@ -55,6 +55,11 @@ class ItemBuilder(private val item: ItemStack) {
         return this
     }
 
+    fun lore(list: List<Component>): ItemBuilder {
+        lore(*list.toTypedArray())
+        return this
+    }
+
     fun addLore(component: Component): ItemBuilder {
         meta()?.let { meta ->
             meta.lore()?.let { stale ->

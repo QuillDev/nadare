@@ -47,10 +47,7 @@ class AttributeRegistryImpl(private val plugin: Plugin, override val keyManager:
                     keyManager.addKey(key)
                     //Build the attribute data for this attribute
                     val data = AttributeData(
-                        annotation.name,
-                        annotation.minLevel,
-                        annotation.maxLevel,
-                        annotation.tags.toList(),
+                        annotation,
                         key,
                         it,
                         listener
