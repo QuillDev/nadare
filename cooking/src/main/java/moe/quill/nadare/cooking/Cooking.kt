@@ -24,6 +24,11 @@ class Cooking : JavaPlugin(), ModuleBase {
 
     override fun onEnable() {
         // Plugin startup logic
+        this.registry = server.servicesManager.load(AttributeRegistry::class.java) ?: return
+        val keyManager = KeyManager(this, registry)
+        registry.register(FoodListeners(keyManager))
+
+
         val campfireManager = CampfireManager(this)
         val tempHandler = TempHandler(campfireManager)
         val weatherChannel = WeatherChannel()
@@ -31,13 +36,12 @@ class Cooking : JavaPlugin(), ModuleBase {
 
         registerListeners(
             CustomEventListener(),
-            PlayerListener(this, campfireManager),
+            PlayerListener(this, campfireManager, keyManager),
             PlayerRespawnListener(tempHandler, tempPacketListener),
         )
         ProtocolLibrary.getProtocolManager().addPacketListener(tempPacketListener)
 
-        this.registry = server.servicesManager.load(AttributeRegistry::class.java) ?: return
-        registry.register(FoodListeners(KeyManager(this)))
+
 
         BukkitLambda{
             Bukkit.getOnlinePlayers().forEach{

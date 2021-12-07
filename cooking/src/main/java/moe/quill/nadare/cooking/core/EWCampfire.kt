@@ -1,6 +1,7 @@
 package moe.quill.nadare.cooking.core
 
 import com.destroystokyo.paper.profile.ProfileProperty
+import moe.quill.nadare.attributes.attributes.AttributeRegistry
 import moe.quill.nadare.cooking.food.FoodItemGenerator
 import moe.quill.nadare.cooking.food.KeyManager
 import moe.quill.nadare.cooking.util.PrettyNameGen
@@ -25,6 +26,7 @@ import kotlin.collections.ArrayList
 
 class EWCampfire(
     private val plugin: JavaPlugin,
+    private val keyManager: KeyManager,
     val location: Location,
     val blockData: Campfire,
     private var hasPot: Boolean
@@ -162,7 +164,7 @@ class EWCampfire(
             player.sendActionBar(Component.text("This food seems a little cold...").color(NamedTextColor.GREEN))
             return
         }
-        val item = FoodItemGenerator(plugin, KeyManager(plugin)).generateFoodItem(this) ?: return
+        val item = FoodItemGenerator(plugin, keyManager).generateFoodItem(this) ?: return
         servings -= 1
 
         val world = player.world

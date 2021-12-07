@@ -1,5 +1,6 @@
 package moe.quill.nadare.cooking.food
 
+import moe.quill.nadare.attributes.attributes.AttributeRegistry
 import moe.quill.nadare.cooking.core.EWCampfire
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -7,7 +8,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.java.JavaPlugin
 
-class KeyManager(private val plugin: JavaPlugin) {
+class KeyManager(private val plugin: JavaPlugin, private val registry: AttributeRegistry) {
     private fun addIntKey(item: ItemStack, keyName: String, value: Int): ItemStack {
         val meta = item.itemMeta
         val data = meta.persistentDataContainer
@@ -31,7 +32,10 @@ class KeyManager(private val plugin: JavaPlugin) {
     }
 
     fun addIngredientKeys(item: ItemStack, campfire: EWCampfire): ItemStack {
-        addIntKey(item, "custom_food", 1)
+        val meta = item.itemMeta
+        val data = meta.persistentDataContainer
+        registry.keyManager.getKey("custom_food")?.let { data.set(it, PersistentDataType.INTEGER, 1 )  }
+
         if (campfire.ingredients.isEmpty()) return item
         for ((index, material) in campfire.ingredients.toList().withIndex()) {
             if (material != null) addStringKey(item, index.toString(), material.name)

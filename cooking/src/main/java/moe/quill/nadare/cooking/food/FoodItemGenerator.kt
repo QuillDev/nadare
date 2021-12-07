@@ -14,7 +14,7 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.potion.PotionEffectType
 
-class FoodItemGenerator(private val plugin: JavaPlugin, private val keyManager: KeyManager) {
+class FoodItemGenerator(private val plugin: JavaPlugin) {
 
     private val adjMap = mapOf<Int, String>(
         1 to "Small ",
@@ -51,7 +51,7 @@ class FoodItemGenerator(private val plugin: JavaPlugin, private val keyManager: 
         itemMeta.lore(lore)
         item.itemMeta = itemMeta
 
-        return keyManager.addIngredientKeys(item, campfire)
+        return item
     }
 
     private fun prettify(material: Material): Component {

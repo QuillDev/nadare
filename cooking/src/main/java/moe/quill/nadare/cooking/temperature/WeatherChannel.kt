@@ -51,8 +51,7 @@ class WeatherChannel {
             if (name.contains("netherite")) warmth++
         }
 
-        Bukkit.getLogger()
-            .info("Env: ${getEnvironmentFactor(location)} Warmth: ${warmth}  Temp: ${getEnvironmentFactor(location) - warmth}")
+        //Bukkit.getLogger().info("Env: ${getEnvironmentFactor(location)} Warmth: ${warmth}  Temp: ${getEnvironmentFactor(location) - warmth}")
         return getEnvironmentFactor(location) - warmth
     }
 
