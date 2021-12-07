@@ -50,6 +50,7 @@ class AttributeRegistryImpl(private val plugin: Plugin, override val keyManager:
                         annotation.name,
                         annotation.minLevel,
                         annotation.maxLevel,
+                        annotation.tags.toList(),
                         key,
                         it,
                         listener

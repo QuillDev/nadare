@@ -1,6 +1,7 @@
 package moe.quill.nadare.everwinter.test
 
 import moe.quill.nadare.attributes.attributes.Attribute
+import moe.quill.nadare.attributes.attributes.AttributeFlag
 import moe.quill.nadare.attributes.events.AttributeConsumeEvent
 import moe.quill.nadare.attributes.events.AttributeContactDamageEvent
 import moe.quill.nadare.attributes.events.management.AttributeListener

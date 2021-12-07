@@ -8,7 +8,13 @@ class AttributeData(
     val name: String,
     val minLevel: Int,
     val maxLevel: Int,
+    val flags: List<String>,
     val key: NamespacedKey,
     val runner: KFunction<*>,
     val parentInstance: AttributeListener
-)
+) {
+
+    fun hasFlags(vararg tags: String): Boolean {
+        return flags.containsAll(tags.toList())
+    }
+}
