@@ -1,6 +1,7 @@
 package moe.quill.nadare.cooking.food
 
 import moe.quill.nadare.cooking.core.EWCampfire
+import moe.quill.nadare.cooking.food.recipe.Cookable
 import moe.quill.nadare.cooking.util.PrettyNameGen
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -14,7 +15,7 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.potion.PotionEffectType
 
-class FoodItemGenerator(private val plugin: JavaPlugin) {
+class FoodItemGenerator() {
 
     private val adjMap = mapOf<Int, String>(
         1 to "Small ",
@@ -27,25 +28,18 @@ class FoodItemGenerator(private val plugin: JavaPlugin) {
         if (ingredients.isEmpty()) return null
 
         val stew = ItemStack(Material.SUSPICIOUS_STEW)
-        val stewMeta = stew.itemMeta
-        stewMeta.displayName(adjMap[ingredients.size]?.let { Component.text(it + "Stew") })
-        stew.setItemMeta(stewMeta)
-
         val food = ItemStack(Material.RABBIT_STEW)
-        val foodMeta = food.itemMeta
-        foodMeta.displayName(adjMap[ingredients.size]?.let { Component.text(it + "Meal") })
-        food.setItemMeta(foodMeta)
 
-        val item = if (campfire.ingredients.contains(Material.POTION)) stew else food
+        val item = if (campfire.ingredients.contains(Cookable.valueOf(Material.POTION))) stew else food
         val itemMeta = item.itemMeta
         var lore = mutableListOf<Component>()
 
-        lore += Component.text("Created From: ").color(NamedTextColor.GREEN)
+        lore += Component.text("Created From: ").color(NamedTextColor.WHITE)
 
         ingredients.forEach {
             if (it != null) {
-                if (it == Material.POTION) Component.text("Broth").color(NamedTextColor.WHITE)
-                else lore += prettify(it).color(NamedTextColor.WHITE)
+                if (it.material == Material.POTION) Component.text("Water").color(NamedTextColor.WHITE)
+                else lore += prettify(it.material).color(NamedTextColor.WHITE)
             }
         }
         itemMeta.lore(lore)

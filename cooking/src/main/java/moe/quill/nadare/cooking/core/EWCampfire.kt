@@ -1,15 +1,14 @@
 package moe.quill.nadare.cooking.core
 
 import com.destroystokyo.paper.profile.ProfileProperty
-import moe.quill.nadare.attributes.attributes.AttributeRegistry
+import moe.quill.nadare.cooking.Cooking
 import moe.quill.nadare.cooking.food.FoodItemGenerator
-import moe.quill.nadare.cooking.food.KeyManager
+import moe.quill.nadare.cooking.food.recipe.Cookable
 import moe.quill.nadare.cooking.util.PrettyNameGen
 import moe.quill.nadare.entries.DynamicEntry
 import moe.quill.nadare.entries.StaticEntry
 import moe.quill.nadare.holograms.DynamicHologram
 import moe.quill.nadare.holograms.Hologram
-import net.kyori.adventure.key.Key
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.*
@@ -20,12 +19,10 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.CreatureSpawnEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
-import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 import kotlin.collections.ArrayList
 
 class EWCampfire(
-    private val plugin: JavaPlugin,
     private val keyManager: KeyManager,
     val location: Location,
     val blockData: Campfire,
@@ -35,19 +32,19 @@ class EWCampfire(
     var pot: ArmorStand? = null
     val SIZE: Int = 3
     var servings = 3
-    var ingredients: MutableList<Material?> = ArrayList()
+    var ingredients: MutableList<Cookable?> = ArrayList()
 
     val listener: CampfireListener = CampfireListener(this)
 
     private var hologram = initHologram()
 
     init {
-        plugin.server.pluginManager.registerEvents(listener, plugin)
+        Cooking.registerListeners(listener)
     }
 
     private fun initHologram() : Hologram{
         if(hologram != null) hologram.clear()
-        val holo = DynamicHologram(plugin, location.clone().add(.5,.5,.5))
+        val holo = DynamicHologram(Cooking, location.clone().add(.5,.5,.5))
         if(!hasPot) {
             holo.addEntry(StaticEntry(Component.text("Add a cauldron for cooking.")))
             return holo
@@ -69,9 +66,9 @@ class EWCampfire(
         return holo
     }
 
-    fun prettify(material: Material?) : Component{
-        material?: return Component.text("[Empty Ingredient Slot]")
-        return Component.text(PrettyNameGen.asPretty(material))
+    fun prettify(cookable: Cookable?) : Component{
+        cookable?: return Component.text("[Empty Ingredient Slot]")
+        return Component.text(PrettyNameGen.asPretty(cookable.material))
     }
 
 
@@ -79,7 +76,7 @@ class EWCampfire(
         if (ingredients.size == SIZE) return
 
         val item = player.inventory.itemInMainHand
-        ingredients.add(item.type)
+        ingredients.add(Cookable.valueOf(item.type))
 
         item.subtract()
 
@@ -164,7 +161,7 @@ class EWCampfire(
             player.sendActionBar(Component.text("This food seems a little cold...").color(NamedTextColor.GREEN))
             return
         }
-        val item = FoodItemGenerator(plugin, keyManager).generateFoodItem(this) ?: return
+        val item = FoodItemGenerator().generateFoodItem(this) ?: return
         servings -= 1
 
         val world = player.world

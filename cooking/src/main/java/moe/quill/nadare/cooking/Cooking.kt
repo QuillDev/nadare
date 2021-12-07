@@ -8,17 +8,15 @@ import moe.quill.nadare.cooking.core.CampfireManager
 import moe.quill.nadare.cooking.core.PlayerListener
 import moe.quill.nadare.cooking.events.CustomEventListener
 import moe.quill.nadare.cooking.food.FoodListeners
-import moe.quill.nadare.cooking.food.KeyManager
 import moe.quill.nadare.cooking.temperature.PlayerRespawnListener
 import moe.quill.nadare.cooking.temperature.TempHandler
 import moe.quill.nadare.cooking.temperature.WeatherChannel
 import moe.quill.nadare.cooking.temperature.TempPacketListener
 import org.bukkit.Bukkit
-import org.bukkit.plugin.ServicePriority
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
-class Cooking : JavaPlugin(), ModuleBase {
+object Cooking : JavaPlugin(), ModuleBase {
     override val plugin = this
     lateinit var registry: AttributeRegistry
 
@@ -28,15 +26,14 @@ class Cooking : JavaPlugin(), ModuleBase {
         val keyManager = KeyManager(this, registry)
         registry.register(FoodListeners(keyManager))
 
-
-        val campfireManager = CampfireManager(this)
+        val campfireManager = CampfireManager()
         val tempHandler = TempHandler(campfireManager)
         val weatherChannel = WeatherChannel()
         val tempPacketListener = TempPacketListener(this, tempHandler)
 
         registerListeners(
             CustomEventListener(),
-            PlayerListener(this, campfireManager, keyManager),
+            PlayerListener(campfireManager, keyManager),
             PlayerRespawnListener(tempHandler, tempPacketListener),
         )
         ProtocolLibrary.getProtocolManager().addPacketListener(tempPacketListener)

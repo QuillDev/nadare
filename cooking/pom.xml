@@ -89,6 +89,12 @@
 
         <dependency>
             <groupId>moe.quill.nadare</groupId>
+            <artifactId>bukkit-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>moe.quill.nadare</groupId>
             <artifactId>holograms</artifactId>
             <version>0.0.1</version>
         </dependency>

@@ -90,7 +90,16 @@ enum class Cookable(val material: Material, val saturation: Double) : CookableSu
     DRAGON_EGG(Material.DRAGON_EGG, 5.0),
     TURTLE_EGG(Material.TURTLE_EGG, 5.0);
 
-    override val cookables = listOf(
-        this
-    )
+    override val cookables = listOf(this)
+
+    companion object{
+        @JvmStatic
+        fun valueOf(material: Material) : Cookable?{
+            Cookable.values().forEach {
+                if(it.material == material) return it
+            }
+            return null
+        }
+    }
+
 }

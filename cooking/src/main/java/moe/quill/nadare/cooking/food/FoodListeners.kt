@@ -3,6 +3,7 @@ package moe.quill.nadare.cooking.food
 import moe.quill.nadare.attributes.attributes.Attribute
 import moe.quill.nadare.attributes.events.AttributeConsumeEvent
 import moe.quill.nadare.attributes.events.management.AttributeListener
+import moe.quill.nadare.cooking.food.recipe.Cookable
 import moe.quill.nadare.cooking.food.recipe.CookingChoice
 import moe.quill.nadare.cooking.food.recipe.CookingRecipe
 import org.bukkit.Bukkit
@@ -10,7 +11,7 @@ import org.bukkit.Material
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-class FoodListeners(private val keyManager: KeyManager) : AttributeListener {
+class FoodListeners() : AttributeListener {
 
     val foodValues = mapOf<Material, Double>(
         Material.GOLDEN_CARROT to 2.4,
@@ -64,22 +65,8 @@ class FoodListeners(private val keyManager: KeyManager) : AttributeListener {
     fun onPlayerEat(event: AttributeConsumeEvent) {
         val player = event.player
         val item = event.item
-        val ingredients = keyManager.getIngredients(item)
-        val isStew = ingredients.contains(Material.POTION)
 
-        var saturation = 0.0
-        ingredients.forEach{
-            if(foodValues.contains(it)) {
-                saturation += foodValues[it]!! / 2
-            }
-        }
-        player.saturation += saturation.toFloat()
-
-        Bukkit.getLogger().info("food this work? : ${saturation}")
-
-        if(ingredients.isNotEmpty()) {
-            player.addPotionEffect(PotionEffect(PotionEffectType.ABSORPTION, 20 * 120, ingredients.size, false, true))
-        }
+        Bukkit.getLogger().info("food this work?")
     }
 
     @Attribute(name = "GILDED")

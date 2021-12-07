@@ -38,4 +38,5 @@ enum class CookingGroup(vararg cookables: Cookable) : CookableSupplier{
     );
 
     override val cookables = cookables.toList()
+
 }
