@@ -1,6 +1,7 @@
 package moe.quill.nadare.cooking.core
 
 import com.destroystokyo.paper.profile.ProfileProperty
+import moe.quill.nadare.bukkitcommon.lib.ModuleBase
 import moe.quill.nadare.cooking.Cooking
 import moe.quill.nadare.cooking.food.FoodItemGenerator
 import moe.quill.nadare.cooking.food.recipe.Cookable
@@ -19,11 +20,12 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.CreatureSpawnEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
+import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 import kotlin.collections.ArrayList
 
 class EWCampfire(
-    private val keyManager: KeyManager,
+    private val module: ModuleBase,
     val location: Location,
     val blockData: Campfire,
     private var hasPot: Boolean
@@ -39,12 +41,12 @@ class EWCampfire(
     private var hologram = initHologram()
 
     init {
-        Cooking.registerListeners(listener)
+        module.registerListeners(listener)
     }
 
     private fun initHologram() : Hologram{
         if(hologram != null) hologram.clear()
-        val holo = DynamicHologram(Cooking, location.clone().add(.5,.5,.5))
+        val holo = DynamicHologram(module.plugin, location.clone().add(.5,.5,.5))
         if(!hasPot) {
             holo.addEntry(StaticEntry(Component.text("Add a cauldron for cooking.")))
             return holo

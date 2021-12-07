@@ -4,8 +4,10 @@ import jdk.jfr.Description
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.util.io.BukkitObjectInputStream
 
 enum class CookingRecipe(val prefix: Component, val description: List<Component>, vararg choices: CookingChoice) {
     GILDED(
@@ -56,4 +58,23 @@ enum class CookingRecipe(val prefix: Component, val description: List<Component>
     );
 
     val choices = choices.toList()
+
+    companion object{
+        @JvmStatic
+        fun findMatches(ingredients: List<Cookable?>) : List<CookingRecipe> {
+            var recipies = mutableListOf<CookingRecipe>()
+            values().forEach {
+                var test = true
+                it.choices.forEach loop@{choice ->
+                    if (!choice.matchesOne(ingredients)) {
+                        test = false
+                        return@loop
+                    }
+                }
+                Bukkit.getLogger().info("Testing ${it.name}: ${test}")
+                if(test) recipies.add(it)
+            }
+            return recipies
+        }
+    }
 }

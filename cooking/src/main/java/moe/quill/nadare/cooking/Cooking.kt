@@ -1,7 +1,7 @@
 package moe.quill.nadare.cooking
 
 import com.comphenix.protocol.ProtocolLibrary
-import moe.quill.nadare.attributes.attributes.AttributeRegistry
+import moe.quill.nadare.attributes.attributes.registry.AttributeRegistry
 import moe.quill.nadare.bukkitcommon.lib.BukkitLambda
 import moe.quill.nadare.bukkitcommon.lib.ModuleBase
 import moe.quill.nadare.cooking.core.CampfireManager
@@ -16,15 +16,14 @@ import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
-object Cooking : JavaPlugin(), ModuleBase {
+class Cooking : JavaPlugin(), ModuleBase {
     override val plugin = this
     lateinit var registry: AttributeRegistry
 
     override fun onEnable() {
         // Plugin startup logic
         this.registry = server.servicesManager.load(AttributeRegistry::class.java) ?: return
-        val keyManager = KeyManager(this, registry)
-        registry.register(FoodListeners(keyManager))
+        registry.register(FoodListeners())
 
         val campfireManager = CampfireManager()
         val tempHandler = TempHandler(campfireManager)
@@ -33,7 +32,7 @@ object Cooking : JavaPlugin(), ModuleBase {
 
         registerListeners(
             CustomEventListener(),
-            PlayerListener(campfireManager, keyManager),
+            PlayerListener(this, campfireManager),
             PlayerRespawnListener(tempHandler, tempPacketListener),
         )
         ProtocolLibrary.getProtocolManager().addPacketListener(tempPacketListener)

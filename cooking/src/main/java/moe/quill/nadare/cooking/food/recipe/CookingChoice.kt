@@ -5,14 +5,13 @@ import org.bukkit.Material
 class CookingChoice(vararg cookables: CookableSupplier) {
     val cookables = cookables.toList()
 
-    fun matches(ingredients: List<Cookable>) : Boolean{
-        var matches = false
+    fun matchesOne(ingredients: List<Cookable?>) : Boolean{
         ingredients.forEach{
+            it ?: return@forEach
             if (cookables.contains(it)) {
-                matches = true
-                return@forEach
+                return true
             }
         }
-        return matches
+        return false
     }
 }

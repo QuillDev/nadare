@@ -7,9 +7,8 @@ import com.comphenix.protocol.events.PacketAdapter
 import com.comphenix.protocol.events.PacketContainer
 import com.comphenix.protocol.events.PacketEvent
 import com.comphenix.protocol.wrappers.WrappedDataWatcher
-import moe.quill.nadare.bukkitcommon.BukkitLambda
+import moe.quill.nadare.bukkitcommon.lib.BukkitLambda
 import org.bukkit.Bukkit
-import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.plugin.Plugin
 import java.util.*

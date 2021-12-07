@@ -10,7 +10,7 @@ import moe.quill.nadare.bukkitcommon.lib.keys.KeyManager
 import org.bukkit.plugin.ServicePriority
 import org.bukkit.plugin.java.JavaPlugin
 
-object AttributePlugin : JavaPlugin(), ModuleBase {
+class AttributePlugin : JavaPlugin(), ModuleBase {
     override val plugin = this
 
     override fun onEnable() {
