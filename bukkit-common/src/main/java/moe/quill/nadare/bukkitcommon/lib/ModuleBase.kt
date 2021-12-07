@@ -1,6 +1,6 @@
-package moe.quill.nadare.bukkitcommon
+package moe.quill.nadare.bukkitcommon.lib
 
-import moe.quill.nadare.bukkitcommon.commands.Command
+import moe.quill.nadare.bukkitcommon.lib.commands.Command
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
 

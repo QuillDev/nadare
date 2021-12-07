@@ -1,6 +1,6 @@
 package moe.quill.nadare.everwinter
 
-import moe.quill.nadare.bukkitcommon.commands.SubCommand
+import moe.quill.nadare.bukkitcommon.lib.commands.SubCommand
 import org.bukkit.command.CommandSender
 
 class SecondCommand : SubCommand {

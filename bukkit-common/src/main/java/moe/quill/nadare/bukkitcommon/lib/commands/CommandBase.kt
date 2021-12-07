@@ -1,4 +1,4 @@
-package moe.quill.nadare.bukkitcommon.commands
+package moe.quill.nadare.bukkitcommon.lib.commands
 
 import org.bukkit.command.CommandSender
 

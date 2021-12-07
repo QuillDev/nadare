@@ -1,6 +1,6 @@
 package moe.quill.nadare.holograms
 
-import moe.quill.nadare.bukkitcommon.BukkitLambda
+import moe.quill.nadare.bukkitcommon.lib.BukkitLambda
 import moe.quill.nadare.entries.Entry
 import org.bukkit.Location
 import org.bukkit.entity.AreaEffectCloud

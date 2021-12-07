@@ -4,8 +4,7 @@ import moe.quill.nadare.attributes.attributes.AttributeRegistryImpl
 import moe.quill.nadare.attributes.events.AttributeConsumeEvent
 import moe.quill.nadare.attributes.events.AttributeContactDamageEvent
 import moe.quill.nadare.attributes.events.AttributeProjectileDamageEvent
-import moe.quill.nadare.bukkitcommon.BukkitLambda
-import org.bukkit.Bukkit
+import moe.quill.nadare.bukkitcommon.lib.BukkitLambda
 import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
