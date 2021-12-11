@@ -127,9 +127,9 @@ enum class CookingRecipe(val prefix: Component, val description: List<Component>
         Component.text("Earthy"),
         listOf(
             Component.text("Earthy:").color(NamedTextColor.BLUE),
-            Component.text("Grants a short effect that ").color(NamedTextColor.WHITE),
-            Component.text("applies bonemeal to grass that you ").color(NamedTextColor.WHITE),
-            Component.text("walk over.").color(NamedTextColor.WHITE)
+            Component.text("Grants a short effect that removes ").color(NamedTextColor.WHITE),
+            Component.text("snow and applies bonemeal to grass ").color(NamedTextColor.WHITE),
+            Component.text("that you walk over.").color(NamedTextColor.WHITE)
         ),
         CookingChoice(CookingGroup.MUSHROOM),
         CookingChoice(CookingGroup.ROOT)
