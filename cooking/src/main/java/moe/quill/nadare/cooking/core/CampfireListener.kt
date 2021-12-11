@@ -2,6 +2,7 @@ package moe.quill.nadare.cooking.core;
 
 import moe.quill.nadare.cooking.events.PlayerLeftClickArmorStandEvent
 import moe.quill.nadare.cooking.events.PlayerRightClickBlockWithItemEvent
+import moe.quill.nadare.cooking.food.recipe.Ingredient
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material;
@@ -72,7 +73,7 @@ public class CampfireListener(private val campfire: EWCampfire) : Listener {
 
         if(item.type == Material.BOWL) return
 
-        if(item.type.isEdible || item.type == Material.POTION) {
+        if(Ingredient.values().contains(Ingredient.valueOf(item.type))) {
             campfire.addIngredient(player)
             return
         }

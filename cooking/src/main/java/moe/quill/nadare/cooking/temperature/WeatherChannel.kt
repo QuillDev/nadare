@@ -6,6 +6,7 @@ import org.bukkit.Material
 import org.bukkit.World
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
+import org.bukkit.potion.PotionEffectType
 import java.util.*
 
 class WeatherChannel {
@@ -41,6 +42,8 @@ class WeatherChannel {
         var warmth = 0
 
         if (player.isVisualFire) warmth += 2 * breakEventHeat
+
+        if(player.hasPotionEffect(PotionEffectType.FIRE_RESISTANCE)) warmth += breakEventHeat
 
         warmth += getHeatSource(player)
 

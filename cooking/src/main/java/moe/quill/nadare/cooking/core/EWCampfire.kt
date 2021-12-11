@@ -2,6 +2,7 @@ package moe.quill.nadare.cooking.core
 
 import com.destroystokyo.paper.profile.ProfileProperty
 import moe.quill.nadare.bukkitcommon.lib.ModuleBase
+import moe.quill.nadare.bukkitcommon.lib.keys.KeyManager
 import moe.quill.nadare.cooking.food.FoodItemGenerator
 import moe.quill.nadare.cooking.food.recipe.Ingredient
 import moe.quill.nadare.cooking.util.PrettyNameGen
@@ -29,6 +30,7 @@ class EWCampfire(
     val blockData: Campfire,
     private var hasPot: Boolean
 ) {
+    var itemGenerator: FoodItemGenerator? = null
 
     var pot: ArmorStand? = null
     val SIZE: Int = 3
@@ -69,7 +71,8 @@ class EWCampfire(
 
     fun prettify(cookable: Ingredient?) : Component{
         cookable?: return Component.text("[Empty Ingredient Slot]")
-        return Component.text(PrettyNameGen.asPretty(cookable.material))
+        return if (cookable.material == Material.POTION) Component.text("Water").color(NamedTextColor.WHITE)
+        else Component.text(PrettyNameGen.asPretty(cookable.material))
     }
 
 
@@ -142,6 +145,7 @@ class EWCampfire(
     fun destroy() {
         removePot()
         location.block.breakNaturally()
+        hologram.destroy()
     }
 
     fun removePot() {
@@ -162,11 +166,15 @@ class EWCampfire(
             player.sendActionBar(Component.text("This food seems a little cold...").color(NamedTextColor.GREEN))
             return
         }
-        val item = FoodItemGenerator().generateFoodItem(this) ?: return
+        val world = player.world
+
+        itemGenerator?.let {
+            val item = it.generateFoodItem(this) ?: return
+            world.dropItemNaturally(location, item).isInvulnerable = true
+        }
+
         servings -= 1
 
-        val world = player.world
-        world.dropItemNaturally(location, item).isInvulnerable = true
         location.world.playSound(location, Sound.BLOCK_HONEY_BLOCK_BREAK, 1f, 1f)
 
         if (servings != 0) return

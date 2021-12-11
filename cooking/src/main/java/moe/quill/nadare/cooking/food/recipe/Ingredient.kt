@@ -77,6 +77,7 @@ enum class Ingredient(val material: Material, val saturation: Double) : Cookable
     PUMPKIN(Material.PUMPKIN, .6),
     CACTUS(Material.CACTUS, .3),
     BAMBOO(Material.BAMBOO, .3),
+    WHEAT(Material.WHEAT, .3),
 
     BROWN_MUSHROOM(Material.BROWN_MUSHROOM, .3),
     RED_MUSHROOM(Material.RED_MUSHROOM, .3),
@@ -88,18 +89,21 @@ enum class Ingredient(val material: Material, val saturation: Double) : Cookable
 
     EGG(Material.EGG, .6),
     DRAGON_EGG(Material.DRAGON_EGG, 5.0),
-    TURTLE_EGG(Material.TURTLE_EGG, 5.0);
+    TURTLE_EGG(Material.TURTLE_EGG, 5.0),
+
+    GLISTENING_MELON(Material.GLISTERING_MELON_SLICE, .3),
+    WATER_BUCKET(Material.WATER_BUCKET, .0);
 
     override val ingredients = listOf(this)
 
-//    companion object{
-//        @JvmStatic
-//        fun valueOf(material: Material) : Cookable?{
-//            Cookable.values().forEach {
-//                if(it.material == material) return it
-//            }
-//            return null
-//        }
-//    }
+    companion object{
+        @JvmStatic
+        fun valueOf(material: Material) : Ingredient?{
+           values().forEach {
+                if(it.material == material) return it
+            }
+            return null
+        }
+    }
 
 }
